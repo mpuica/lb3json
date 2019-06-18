@@ -1,0 +1,6 @@
+{
+  "/": {
+    "controller": "NoteCtrl",
+    "templateUrl": "/views/notes.html"
+  }
+}

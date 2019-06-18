@@ -1,0 +1,76 @@
+<section id="local-conflicts" class="conflicts" ng-if="localConflicts.length">
+  <h1>Local Conflicts</h1>
+  <div ng-repeat="conflict in localConflicts">
+    <table>
+      <tr>
+        <th>Local Data</th>
+        <th>Remote Data</th>
+      </tr>
+      <tr>
+        <td>
+          <div ng-if="conflict.sourceChange.type() === 'delete'">
+            <strong>Deleted</strong>
+          </div>
+          <table ng-if="conflict.sourceChange.type() !== 'delete'">
+            <tr>
+              <th>id</th>
+              <th>change</th>
+              <th>payload</th>
+            </tr>
+            <tr>
+              <td>{{conflict.sourceChange.modelId}}</td>
+              <td>{{conflict.sourceChange.type()}}</td>
+              <td>
+                {{conflict.source.payload}}
+              </td>
+            </tr>
+          </table>
+          <button ng-click="resolveUsingSource(conflict)">Use Local Version</button>
+        </td>
+        <td>
+          <div ng-if="conflict.targetChange.type() === 'delete'">
+            <strong>Deleted</strong>
+          </div>
+          <table ng-if="conflict.targetChange.type() !== 'delete'">
+            <tr>
+              <th>id</th>
+              <th>change</th>
+              <th>payload</th>
+            </tr>
+            <tr>
+              <td>{{conflict.targetChange.modelId}}</td>
+              <td>{{conflict.targetChange.type()}}</td>
+              <td>
+                {{conflict.target.payload}}
+              </td>
+            </tr>
+          </table>
+          <button ng-click="resolveUsingTarget(conflict)">Use Server Version</button>
+        </td>
+      </tr>
+    </table>
+    <div class="manual-merge">
+      <h4>Merge Manually</h4>
+      <input class="toggle" type="checkbox" ng-model="conflict.manual.completed">
+      <input class="edit" ng-trim="false" ng-model="conflict.manual.payload">
+      <button ng-click="resolveManually(conflict)">Use This Version</button>
+    </div>
+  </div>
+</section>
+
+<section id="todoapp">
+  <header id="header">
+    <h1>json</h1>
+  </header>
+  <section id="main">
+    <div class="view">
+      <label ng-dblclick="editNote(note)">{{note.payload}}</label>
+    </div>
+    <form ng-submit="doneEditing(note)">
+      <input class="edit" ng-trim="false" ng-model="note.payload" ng-blur="doneEditing(note)" todo-escape="revertEditing(note)" todo-focus="note == editedNote">
+    </form>
+  </section>
+</section>
+<footer class="debug">
+  <button ng-click="sync()" ng-class="{deltas: needSync}">Sync</button>
+</footer>

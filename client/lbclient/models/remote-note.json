@@ -1,0 +1,7 @@
+{
+  "name": "RemoteNote",
+  "base": "Note",
+  "plural": "Notes",
+  "trackChanges": true,
+  "enableRemoteReplication": true
+}

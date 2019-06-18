@@ -1,0 +1,21 @@
+{
+  "name": "Note",
+  "base": "PersistedModel",
+  "strict": "throw",
+  "persisteUndefinedAsNull": true,
+  "trackChanges": true,
+  "properties": {
+    "id": {
+      "id": true,
+      "type": "string",
+      "defaultFn": "guid"
+    },
+    "payload": {
+      "type": "object",
+      "default": {}
+    },
+    "created": {
+      "type": "number"
+    }
+  }
+}
